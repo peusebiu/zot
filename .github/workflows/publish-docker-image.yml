@@ -14,11 +14,11 @@ jobs:
         with:
           registry: docker.pkg.github.com
           username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build container image
         uses: docker/build-push-action@v2
         with:
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/zot:latest
-            ghcr.io/${{ github.repository }}/zot:${{ github.event.release.tag_name }}
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.event.release.tag_name }}

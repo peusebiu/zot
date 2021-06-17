@@ -1,4 +1,4 @@
-on: [push, pull_request]
+on: [push, pull_request, create_release]
 name: Build and test ZOT
 jobs:
   build-test:

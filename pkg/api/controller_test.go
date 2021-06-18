@@ -1683,10 +1683,6 @@ func TestHTTPReadOnly(t *testing.T) {
 					}
 					time.Sleep(100 * time.Millisecond)
 				}
-				defer func(controller *api.Controller) {
-					ctx := context.Background()
-					_ = controller.Server.Shutdown(ctx)
-				}(c)
 				// with creds, should get expected status code
 				resp, _ := resty.R().SetBasicAuth(user, password).Get(BaseURL4 + "/v2/")
 				So(resp, ShouldNotBeNil)
@@ -1708,6 +1704,11 @@ func TestHTTPReadOnly(t *testing.T) {
 				resp, _ = resty.R().SetBasicAuth("chuck", "chuck").Get(BaseURL4 + "/v2/")
 				So(resp, ShouldNotBeNil)
 				So(resp.StatusCode(), ShouldEqual, 401)
+
+				defer func(controller *api.Controller) {
+					ctx := context.Background()
+					_ = controller.Server.Shutdown(ctx)
+				}(c)
 			}()
 		}
 	})

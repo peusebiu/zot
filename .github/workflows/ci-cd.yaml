@@ -2,16 +2,18 @@ on:
   push:
     branches: 
       - master
+      - gh_actions_build
   pull_request:
     branches:
       - master
+      - gh_actions_build
   release:
     types:
       - published
 name: CI/CD
 jobs:
   conformance:
-    if: github.event_name == "push" || github.event_name == "pull_request"
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     name: Conformance
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -93,7 +95,7 @@ jobs:
           args: bin/zot*
 
   push-image:
-    if: github.event_name == "release" && github.event_name == "published"
+    if: github.event_name == 'release' && github.event_name == 'published'
     name: Push Docker image to GitHub Packages
     runs-on: ubuntu-latest
     steps:

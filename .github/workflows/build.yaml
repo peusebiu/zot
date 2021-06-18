@@ -14,7 +14,11 @@ jobs:
         with:
           go-version: 1.14
 
+      - name: Check out source code
+        uses: actions/checkout@v1
+
       - name: Install dependencies
+        working-directory: ./zot
         run: |
           go get -u github.com/swaggo/swag/cmd/swag
           go mod download
@@ -23,16 +27,17 @@ jobs:
           sudo apt install snapd
           sudo snap install skopeo --edge --devmode
 
-      - name: Check out source code
-        uses: actions/checkout@v1
-
       - name: Run build and test
+        working-directory: ./zot
         run: make
 
       - name: Upload code coverage
+        working-directory: ./zot
         uses: codecov/codecov-action@v1  
       
       - if: github.event_name == 'release' && github.event.action == 'created'
+        name: Publish artifacts on releases
+        working-directory: ./zot
         uses: Roang-zero1/github-upload-release-artifacts-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -32,7 +32,6 @@ jobs:
         run: make
 
       - name: Upload code coverage
-        working-directory: ./zot
         uses: codecov/codecov-action@v1  
       
       - if: github.event_name == 'release' && github.event.action == 'created'

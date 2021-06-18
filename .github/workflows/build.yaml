@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ${{ GITHUB_WORKSPACE }}
+          cd $GITHUB_WORKSPACE
           go get -u github.com/swaggo/swag/cmd/swag
           go mod download
           sudo apt-get update
@@ -29,7 +29,7 @@ jobs:
 
       - name: Run build and test
         run: |
-          cd ${{ GITHUB_WORKSPACE }} && make
+          cd $GITHUB_WORKSPACE && make
 
       - name: Upload code coverage
         uses: codecov/codecov-action@v1  
@@ -40,4 +40,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: ${{ GITHUB_WORKSPACE }}/bin/zot*
+          args: $GITHUB_WORKSPACE/bin/zot*

@@ -1683,13 +1683,9 @@ func TestHTTPReadOnly(t *testing.T) {
 					}
 					time.Sleep(100 * time.Millisecond)
 				}
-				// with creds, should get expected status code
-				resp, _ := resty.R().SetBasicAuth(user, password).Get(BaseURL4 + "/v2/")
-				So(resp, ShouldNotBeNil)
-				So(resp.StatusCode(), ShouldEqual, 200)
 
 				// with creds, should get expected status code
-				resp, _ = resty.R().SetBasicAuth(user, password).Get(BaseURL4 + "/v2/")
+				resp, _ := resty.R().SetBasicAuth(user, password).Get(BaseURL4 + "/v2/")
 				So(resp, ShouldNotBeNil)
 				So(resp.StatusCode(), ShouldEqual, 200)
 

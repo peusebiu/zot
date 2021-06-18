@@ -39,7 +39,7 @@ jobs:
       - name: Upload code coverage
         uses: codecov/codecov-action@v1  
       
-      - if: github.event_name == 'release' && github.event.action == 'created'
+      - if: github.event_name == 'release' && github.event.action == 'published'
         name: Publish artifacts on releases
         uses: Roang-zero1/github-upload-release-artifacts-action@master
         env:

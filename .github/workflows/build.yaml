@@ -36,9 +36,8 @@ jobs:
       
       - if: github.event_name == 'release' && github.event.action == 'created'
         name: Publish artifacts on releases
-        working-directory: ./zot
         uses: Roang-zero1/github-upload-release-artifacts-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: bin/zot*
+          args: ./zot/bin/zot*
